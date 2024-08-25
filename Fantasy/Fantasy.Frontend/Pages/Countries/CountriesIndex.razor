@@ -1,0 +1,31 @@
+﻿@page "/countries"
+
+<h3>CountriesIndex</h3>
+
+@if(Countries is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr> 
+                <td>País</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var country in Countries!)
+            {
+                <tr>
+                    <td>@country.Name</td>
+                    <td>
+                        <a class="btn btn-warning">Editar</a>
+                        <button class="btn btn-danger">Borrar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
