@@ -223,6 +223,15 @@ namespace Fantasy.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Record created succesfully.
+        /// </summary>
+        public static string RecordCreatedOk {
+            get {
+                return ResourceManager.GetString("RecordCreatedOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Record deleted successfully..
         /// </summary>
         public static string RecordDeletedOk {

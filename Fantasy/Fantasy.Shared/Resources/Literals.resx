@@ -192,4 +192,7 @@
   <data name="New" xml:space="preserve">
     <value>New</value>
   </data>
+  <data name="RecordCreatedOk" xml:space="preserve">
+    <value>Record created succesfully</value>
+  </data>
 </root>
