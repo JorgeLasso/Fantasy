@@ -27,7 +27,7 @@ public partial class CountriesIndex
         if (responseHppt.Error)
         {
             var message = await responseHppt.GetErrorMessageAsync();
-            await SweetAlertService.FireAsync(Localizer["Error"], message, SweetAlertIcon.Error);
+            await SweetAlertService.FireAsync(Localizer["Error"], Localizer[message!], SweetAlertIcon.Error);
             return;
         }
         Countries = responseHppt.Response!;
@@ -60,8 +60,8 @@ public partial class CountriesIndex
             }
             else
             {
-                var mensajeError = await responseHttp.GetErrorMessageAsync();
-                await SweetAlertService.FireAsync(Localizer["Error"], mensajeError, SweetAlertIcon.Error);
+                var messageError = await responseHttp.GetErrorMessageAsync();
+                await SweetAlertService.FireAsync(Localizer["Error"], Localizer[messageError!], SweetAlertIcon.Error);
             }
             return;
         }
