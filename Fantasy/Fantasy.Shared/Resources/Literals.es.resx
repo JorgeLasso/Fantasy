@@ -214,7 +214,7 @@
     <value>Equipos</value>
   </data>
   <data name="SelectFile" xml:space="preserve">
-    <value>Seleccione un archivo...</value>
+    <value>Seleccione un archivo...                </value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Buscar…</value>
