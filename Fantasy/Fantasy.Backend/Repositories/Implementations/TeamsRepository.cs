@@ -54,6 +54,27 @@ namespace Fantasy.Backend.Repositories.Implementations
             };
         }
 
+        public override async Task<ActionResponse<IEnumerable<Team>>> GetAsync(PaginationDTO pagination)
+        {
+            var queryable = _context.Teams
+                .Include(x => x.Country)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(pagination.Filter))
+            {
+                queryable = queryable.Where(x => x.Country!.Name.ToLower().Contains(pagination.Filter.ToLower()));
+            }
+
+            return new ActionResponse<IEnumerable<Team>>
+            {
+                WasSuccess = true,
+                Result = await queryable
+                    .OrderBy(x => x.Name)
+                    .Paginate(pagination)
+                    .ToListAsync()
+            };
+        }
+
         public async Task<ActionResponse<Team>> AddAsync(TeamDTO teamDTO)
         {
             var country = await _context.Countries.FindAsync(teamDTO.CountryId);
@@ -171,6 +192,23 @@ namespace Fantasy.Backend.Repositories.Implementations
                     Message = exception.Message
                 };
             }
+        }
+
+        public async Task<ActionResponse<int>> GetTotalRecordsAsync(PaginationDTO pagination)
+        {
+            var queryable = _context.Teams.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(pagination.Filter))
+            {
+                queryable = queryable.Where(x => x.Country!.Name.ToLower().Contains(pagination.Filter.ToLower()));
+            }
+
+            double count = await queryable.CountAsync();
+            return new ActionResponse<int>
+            {
+                WasSuccess = true,
+                Result = (int)count
+            };
         }
     }
 }
