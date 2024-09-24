@@ -70,11 +70,47 @@ namespace Fantasy.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Actions.
+        /// </summary>
+        public static string Actions {
+            get {
+                return ResourceManager.GetString("Actions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Admin.
+        /// </summary>
+        public static string Admin {
+            get {
+                return ResourceManager.GetString("Admin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        public static string All {
+            get {
+                return ResourceManager.GetString("All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clean.
+        /// </summary>
+        public static string Clean {
+            get {
+                return ResourceManager.GetString("Clean", resourceCulture);
             }
         }
         
@@ -196,6 +232,24 @@ namespace Fantasy.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filter.
+        /// </summary>
+        public static string Filter {
+            get {
+                return ResourceManager.GetString("Filter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First Name.
+        /// </summary>
+        public static string FirstName {
+            get {
+                return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string Home {
@@ -210,6 +264,33 @@ namespace Fantasy.Shared.Resources {
         public static string Image {
             get {
                 return ResourceManager.GetString("Image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image is rectangular.
+        /// </summary>
+        public static string ImageIsRectangular {
+            get {
+                return ResourceManager.GetString("ImageIsRectangular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image is square.
+        /// </summary>
+        public static string ImageIsSquare {
+            get {
+                return ResourceManager.GetString("ImageIsSquare", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Name.
+        /// </summary>
+        public static string LastName {
+            get {
+                return ResourceManager.GetString("LastName", resourceCulture);
             }
         }
         
@@ -250,6 +331,15 @@ namespace Fantasy.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please wait....
+        /// </summary>
+        public static string PleaseWait {
+            get {
+                return ResourceManager.GetString("PleaseWait", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Record created succesfully.
         /// </summary>
         public static string RecordCreatedOk {
@@ -273,6 +363,24 @@ namespace Fantasy.Shared.Resources {
         public static string RecordSavedOk {
             get {
                 return ResourceManager.GetString("RecordSavedOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Records Number:.
+        /// </summary>
+        public static string RecordsNumber {
+            get {
+                return ResourceManager.GetString("RecordsNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rectangular.
+        /// </summary>
+        public static string Rectangular {
+            get {
+                return ResourceManager.GetString("Rectangular", resourceCulture);
             }
         }
         
@@ -331,6 +439,15 @@ namespace Fantasy.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Square.
+        /// </summary>
+        public static string Square {
+            get {
+                return ResourceManager.GetString("Square", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Soccer predictions app.
         /// </summary>
         public static string Subtitle {
@@ -363,6 +480,24 @@ namespace Fantasy.Shared.Resources {
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.
+        /// </summary>
+        public static string User {
+            get {
+                return ResourceManager.GetString("User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Type.
+        /// </summary>
+        public static string UserType {
+            get {
+                return ResourceManager.GetString("UserType", resourceCulture);
             }
         }
         

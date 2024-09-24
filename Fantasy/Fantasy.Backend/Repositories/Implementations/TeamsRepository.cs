@@ -62,7 +62,7 @@ namespace Fantasy.Backend.Repositories.Implementations
 
             if (!string.IsNullOrWhiteSpace(pagination.Filter))
             {
-                queryable = queryable.Where(x => x.Country!.Name.ToLower().Contains(pagination.Filter.ToLower()));
+                queryable = queryable.Where(x => x.Name.ToLower().Contains(pagination.Filter.ToLower()));
             }
 
             return new ActionResponse<IEnumerable<Team>>
@@ -200,7 +200,7 @@ namespace Fantasy.Backend.Repositories.Implementations
 
             if (!string.IsNullOrWhiteSpace(pagination.Filter))
             {
-                queryable = queryable.Where(x => x.Country!.Name.ToLower().Contains(pagination.Filter.ToLower()));
+                queryable = queryable.Where(x => x.Name.ToLower().Contains(pagination.Filter.ToLower()));
             }
 
             double count = await queryable.CountAsync();

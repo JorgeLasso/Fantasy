@@ -214,12 +214,57 @@
     <value>Equipos</value>
   </data>
   <data name="SelectFile" xml:space="preserve">
-    <value>Seleccione un archivo...                </value>
+    <value>Seleccione un archivo...</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Buscar…</value>
   </data>
   <data name="SelectACountry" xml:space="preserve">
     <value>-- Selecciona un País ---</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Todos</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filtrar</value>
+  </data>
+  <data name="Clean" xml:space="preserve">
+    <value>Limpiar</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Acciones</value>
+  </data>
+  <data name="PleaseWait" xml:space="preserve">
+    <value>Por favor espere...</value>
+  </data>
+  <data name="Rectangular" xml:space="preserve">
+    <value>Rectangular</value>
+  </data>
+  <data name="Square" xml:space="preserve">
+    <value>Cuadrada</value>
+  </data>
+  <data name="ImageIsSquare" xml:space="preserve">
+    <value>La imagen es cuadrada</value>
+  </data>
+  <data name="ImageIsRectangular" xml:space="preserve">
+    <value>La imagen es rectangular</value>
+  </data>
+  <data name="RecordsNumber" xml:space="preserve">
+    <value>Número de registros:</value>
+  </data>
+  <data name="Admin" xml:space="preserve">
+    <value>Administrador</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Nombres</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Apelidos</value>
+  </data>
+  <data name="UserType" xml:space="preserve">
+    <value>Tipo de usuario</value>
   </data>
 </root>
