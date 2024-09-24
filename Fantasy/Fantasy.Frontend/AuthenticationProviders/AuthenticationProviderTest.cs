@@ -13,7 +13,7 @@ public class AuthenticationProviderTest : AuthenticationStateProvider
     {
         new Claim("FirstName", "Jorge"),
         new Claim("LastName", "Lasso"),
-        new Claim(ClaimTypes.Name, "jorgelasso_1992@hotmail.com")
+        new Claim(ClaimTypes.Name, "jorgelasso_1992@hotmail.com"),
         new Claim(ClaimTypes.Role, "Admin")
     },
    authenticationType: "test");
