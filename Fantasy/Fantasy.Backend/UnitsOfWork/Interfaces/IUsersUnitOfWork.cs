@@ -6,6 +6,12 @@ namespace Fantasy.Backend.UnitsOfWork.Interfaces;
 
 public interface IUsersUnitOfWork
 {
+    Task<User> GetUserAsync(Guid userId);
+
+    Task<string> GenerateEmailConfirmationTokenAsync(User user);
+
+    Task<IdentityResult> ConfirmEmailAsync(User user, string token);
+
     Task<User> GetUserAsync(string email);
 
     Task<IdentityResult> AddUserAsync(User user, string password);

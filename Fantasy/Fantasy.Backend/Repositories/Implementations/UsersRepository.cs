@@ -22,9 +22,27 @@ public class UsersRepository : IUsersRepository
         _signInManager = signInManager;
     }
 
+    public async Task<User> GetUserAsync(Guid userId)
+    {
+        var user = await _context.Users
+            .Include(u => u.Country)
+            .FirstOrDefaultAsync(x => x.Id == userId.ToString());
+        return user!;
+    }
+
+    public async Task<string> GenerateEmailConfirmationTokenAsync(User user)
+    {
+        return await _userManager.GenerateEmailConfirmationTokenAsync(user);
+    }
+
+    public async Task<IdentityResult> ConfirmEmailAsync(User user, string token)
+    {
+        return await _userManager.ConfirmEmailAsync(user, token);
+    }
+
     public async Task<SignInResult> LoginAsync(LoginDTO model)
     {
-        return await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+        return await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, true);
     }
 
     public async Task LogoutAsync()
