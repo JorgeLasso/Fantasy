@@ -29,6 +29,24 @@ public class AccountsController : ControllerBase
         _context = context;
     }
 
+    [HttpPost("ResendToken")]
+    public async Task<IActionResult> ResendTokenAsync([FromBody] EmailDTO model)
+    {
+        var user = await _usersUnitOfWork.GetUserAsync(model.Email);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        var response = await SendConfirmationEmailAsync(user, model.Language);
+        if (response.WasSuccess)
+        {
+            return NoContent();
+        }
+
+        return BadRequest(response.Message);
+    }
+
     [HttpPost("CreateUser")]
     public async Task<IActionResult> CreateUser([FromBody] UserDTO model)
     {
