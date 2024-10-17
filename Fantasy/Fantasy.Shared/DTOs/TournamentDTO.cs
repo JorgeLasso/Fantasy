@@ -1,9 +1,9 @@
 ﻿using Fantasy.Shared.Resources;
 using System.ComponentModel.DataAnnotations;
 
-namespace Fantasy.Shared.Entities;
+namespace Fantasy.Shared.DTOs;
 
-public class Team
+public class TournamentDTO
 {
     public int Id { get; set; }
 
@@ -12,15 +12,12 @@ public class Team
     [Required(ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Literals))]
     public string Name { get; set; } = null!;
 
+    [Display(Name = "Image", ResourceType = typeof(Literals))]
     public string? Image { get; set; }
 
-    public Country? Country { get; set; }
+    [Display(Name = "IsActive", ResourceType = typeof(Literals))]
+    public bool IsActive { get; set; }
 
-    public int CountryId { get; set; }
-
-    public string ImageFull => string.IsNullOrEmpty(Image) ? "/images/NoImage.png" : Image;
-
-    public ICollection<TournamentTeam>? TournamentTeams { get; set; }
-
-    public int TournamentsCount => TournamentTeams == null ? 0 : TournamentTeams.Count;
+    [Display(Name = "Remarks", ResourceType = typeof(Literals))]
+    public string? Remarks { get; set; }
 }
