@@ -29,4 +29,12 @@ public class Tournament
     public ICollection<Match>? Matches { get; set; }
 
     public int MatchesCount => Matches == null ? 0 : Matches.Count;
+
+    public ICollection<Group>? Groups { get; set; }
+
+    public int GroupsCount => Groups == null ? 0 : Groups.Count;
+
+    public ICollection<Prediction>? Predictions { get; set; }
+
+    public int PredictionsCount => Predictions == null ? 0 : Predictions.Count;
 }
