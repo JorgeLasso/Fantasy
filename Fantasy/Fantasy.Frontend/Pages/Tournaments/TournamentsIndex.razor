@@ -31,12 +31,18 @@ else
             <MudTh>@Localizer["Image"]</MudTh>
             <MudTh>@Localizer["IsActive"]</MudTh>
             <MudTh>@Localizer["Remarks"]</MudTh>
-            <MudTh>@Localizer["Actions"]</MudTh>
+            <MudTh># @Localizer["Teams"]</MudTh>
+            <MudTh># @Localizer["Matches"]</MudTh>
+            <MudTh style="width: 300px;">@Localizer["Actions"]</MudTh>
         </HeaderContent>
         <RowTemplate>
-            <MudTd>@context.Name</MudTd>
             <MudTd>
-                <MudImage Src="@context.ImageFull" Width="80" />
+                <MudText Style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;">
+                    @context.Name
+                </MudText>
+            </MudTd>
+            <MudTd>
+                <img src="@context.ImageFull" style="width:80px;" />
             </MudTd>
             <MudTd>
                 @if (context.IsActive)
@@ -48,40 +54,43 @@ else
                     <MudIcon Icon="@Icons.Material.Filled.Cancel" Color="Color.Error" />
                 }
             </MudTd>
-            <MudTd>@context.Remarks</MudTd>
             <MudTd>
-                <MudTooltip Text="@Localizer["Teams"]">
-                    <MudButton Variant="Variant.Filled"
-                               EndIcon="@Icons.Material.Filled.SportsSoccer"
-                               Color="Color.Primary"
-                               OnClick="@(() => TeamsAction(@context))" style="width: 100px;">
-                        @context.TeamsCount
-                    </MudButton>
-                </MudTooltip>
-               @*  <MudTooltip Text="@Localizer["Matches"]">
-                    <MudButton Variant="Variant.Filled"
-                               EndIcon="@Icons.Material.Filled.Sports"
-                               Color="Color.Success"
-                               OnClick="@(() => MatchesAction(@context))" style="width: 100px;">
-                        @context.MatchesCount
-                    </MudButton>
-                </MudTooltip> *@
-                <MudTooltip Text="@Localizer["Edit"]">
-                    <MudButton Variant="Variant.Filled"
-                               Color="Color.Warning"
-                               OnClick="@(() => ShowModalAsync(context.Id, true))">
-                        <MudIcon Icon="@Icons.Material.Filled.Edit" />
-                    </MudButton>
-                </MudTooltip>
-                <MudTooltip Text="@Localizer["Delete"]">
-                    <MudButton Variant="Variant.Filled"
-                               Color="Color.Error"
-                               OnClick="@(() => DeleteAsync(@context))">
-                        <MudIcon Icon="@Icons.Material.Filled.Delete" />
-                    </MudButton>
-                </MudTooltip>
+                <MudText Style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 340px;">
+                    @context.Remarks
+                </MudText>
+            </MudTd>
+            <MudTd>
+                <MudButton Variant="Variant.Filled"
+                           EndIcon="@Icons.Material.Filled.SportsSoccer"
+                           Color="Color.Info"
+                           OnClick="@(() => TeamsAction(@context))" style="width: 100px;">
+                    @context.TeamsCount
+                </MudButton>
+            </MudTd>
+            <MudTd>
+                <MudButton Variant="Variant.Filled"
+                           EndIcon="@Icons.Material.Filled.Sports"
+                           Color="Color.Success"
+                           OnClick="@(() => MatchesAction(@context))" style="width: 100px;">
+                    @context.MatchesCount
+                </MudButton>
+            </MudTd>
+            <MudTd>
+                <MudButton Variant="Variant.Outlined"
+                           EndIcon="@Icons.Material.Filled.Edit"
+                           Color="Color.Warning"
+                           OnClick="@(() => ShowModalAsync(context.Id, true))">
+                    @Localizer["Edit"]
+                </MudButton>
+                <MudButton Variant="Variant.Outlined"
+                           EndIcon="@Icons.Material.Filled.Delete"
+                           Color="Color.Error"
+                           OnClick=@(() => DeleteAsync(@context))>
+                    @Localizer["Delete"]
+                </MudButton>
             </MudTd>
         </RowTemplate>
+
         <NoRecordsContent>
             <MudText>@Localizer["NoRecords"]</MudText>
         </NoRecordsContent>
