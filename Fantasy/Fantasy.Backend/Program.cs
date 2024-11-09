@@ -65,6 +65,8 @@ builder.Services.AddScoped<IGroupsRepository, GroupsRepository>();
 builder.Services.AddScoped<IGroupsUnitOfWork, GroupsUnitOfWork>();
 builder.Services.AddScoped<IMatchesRepository, MatchesRepository>();
 builder.Services.AddScoped<IMatchesUnitOfWork, MatchesUnitOfWork>();
+builder.Services.AddScoped<IPredictionsRepository, PredictionsRepository>();
+builder.Services.AddScoped<IPredictionsUnitOfWork, PredictionsUnitOfWork>();
 builder.Services.AddScoped<ITeamsRepository, TeamsRepository>();
 builder.Services.AddScoped<ITeamsUnitOfWork, TeamsUnitOfWork>();
 builder.Services.AddScoped<ITournamentsRepository, TournamentsRepository>();
