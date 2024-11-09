@@ -1,2 +1,4 @@
+DELETE FROM UserGroups
+DELETE FROM Groups
 DELETE FROM AspNetUserRoles
 DELETE FROM AspNetUsers

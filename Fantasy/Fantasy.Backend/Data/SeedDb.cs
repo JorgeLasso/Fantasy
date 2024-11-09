@@ -25,8 +25,153 @@ public class SeedDb
         await CheckCountriesAsync();
         await CheckTeamsAsync();
         await CheckRolesAsync();
-        await CheckUserAsync("Jorge", "Lasso", "jorgelasso_1992@hotmail.com", "3184914084", UserType.Admin);
+        await CheckUsersAsync();
         await CheckTournamentsAsync();
+        await CheckGroupsAsync();
+    }
+
+    private async Task CheckUsersAsync()
+    {
+        await CheckUserAsync("Brad", "Pitt", "brad@yopmail.com", "322 311 4620", "Brad.jpg", UserType.User);
+        await CheckUserAsync("Angelina", "Jolie", "angelina@yopmail.com", "322 311 4620", "Angelina.jpg", UserType.User);
+        await CheckUserAsync("Bob", "Marley", "bob@yopmail.com", "322 311 4620", "bob.jpg", UserType.User);
+        await CheckUserAsync("Celia", "Cruz", "celia@yopmail.com", "322 311 4620", "celia.jpg", UserType.Admin);
+        await CheckUserAsync("Fredy", "Mercury", "fredy@yopmail.com", "322 311 4620", "fredy.jpg", UserType.User);
+        await CheckUserAsync("Hector", "Lavoe", "hector@yopmail.com", "322 311 4620", "hector.jpg", UserType.User);
+        await CheckUserAsync("Liv", "Taylor", "liv@yopmail.com", "322 311 4620", "liv.jpg", UserType.User);
+        await CheckUserAsync("Otep", "Shamaya", "otep@yopmail.com", "322 311 4620", "otep.jpg", UserType.User);
+        await CheckUserAsync("Ozzy", "Osbourne", "ozzy@yopmail.com", "322 311 4620", "ozzy.jpg", UserType.User);
+        await CheckUserAsync("Selena", "Quintanilla", "selena@yopmail.com", "322 311 4620", "selena.jpg", UserType.User);
+    }
+
+    private async Task<User> CheckUserAsync(string firstName, string lastName, string email, string phone, string image, UserType userType)
+    {
+        var user = await _usersUnitOfWork.GetUserAsync(email);
+        if (user == null)
+        {
+            var filePath = $"{Environment.CurrentDirectory}\\Images\\users\\{image}";
+            var fileBytes = File.ReadAllBytes(filePath);
+            var imagePath = await _fileStorage.SaveFileAsync(fileBytes, "jpg", "users");
+
+            var country = await _context.Countries.FirstOrDefaultAsync(x => x.Name == "Colombia");
+            user = new User
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Email = email,
+                UserName = email,
+                PhoneNumber = phone,
+                Country = country!,
+                UserType = userType,
+                Photo = imagePath
+            };
+
+            await _usersUnitOfWork.AddUserAsync(user, "123456");
+            await _usersUnitOfWork.AddUserToRoleAsync(user, userType.ToString());
+
+            var token = await _usersUnitOfWork.GenerateEmailConfirmationTokenAsync(user);
+            await _usersUnitOfWork.ConfirmEmailAsync(user, token);
+        }
+
+        return user;
+    }
+
+    private async Task CheckGroupsAsync()
+    {
+        if (!_context.Groups.Any())
+        {
+            var brad = await _context.Users.FirstOrDefaultAsync(x => x.UserName == "brad@yopmail.com");
+            var angelina = await _context.Users.FirstOrDefaultAsync(x => x.UserName == "angelina@yopmail.com");
+            var bob = await _context.Users.FirstOrDefaultAsync(x => x.UserName == "bob@yopmail.com");
+            var celia = await _context.Users.FirstOrDefaultAsync(x => x.UserName == "celia@yopmail.com");
+            var fredy = await _context.Users.FirstOrDefaultAsync(x => x.UserName == "fredy@yopmail.com");
+            var hector = await _context.Users.FirstOrDefaultAsync(x => x.UserName == "hector@yopmail.com");
+            var liv = await _context.Users.FirstOrDefaultAsync(x => x.UserName == "liv@yopmail.com");
+            var otep = await _context.Users.FirstOrDefaultAsync(x => x.UserName == "otep@yopmail.com");
+            var ozzy = await _context.Users.FirstOrDefaultAsync(x => x.UserName == "ozzy@yopmail.com");
+            var selena = await _context.Users.FirstOrDefaultAsync(x => x.UserName == "selena@yopmail.com");
+
+            var copaAmerica = await _context.Tournaments.FirstOrDefaultAsync(x => x.Name == "Copa América - 2025");
+
+            var celiaGroup = new Group
+            {
+                Admin = celia!,
+                Code = Guid.NewGuid().ToString().Substring(0, 6).ToUpper(),
+                Name = "Gupo Zulu Copa America",
+                Remarks = "Valor COP$50,000. Primer puesto 70% del premio, segundo puesto 30% del premio",
+                Tournament = copaAmerica!,
+                Image = copaAmerica?.Image,
+                IsActive = true,
+                Members =
+                [
+                    new UserGroup { IsActive = true, User = brad! },
+                    new UserGroup { IsActive = true, User = angelina! },
+                    new UserGroup { IsActive = true, User = bob! },
+                    new UserGroup { IsActive = true, User = celia! },
+                    new UserGroup { IsActive = true, User = fredy! },
+                    new UserGroup { IsActive = true, User = selena! },
+            ],
+            };
+            _context.Add(celiaGroup);
+
+            var selenaGroup = new Group
+            {
+                Admin = selena!,
+                Code = Guid.NewGuid().ToString().Substring(0, 6).ToUpper(),
+                Name = "Gupo Selena Copa America",
+                Remarks = "Valor USD$30.00. Primer puesto 80% del premio, segundo puesto 20% del premio",
+                Tournament = copaAmerica!,
+                Image = copaAmerica?.Image,
+                IsActive = true,
+                Members =
+                [
+                    new UserGroup { IsActive = true, User = celia! },
+                    new UserGroup { IsActive = true, User = fredy! },
+                    new UserGroup { IsActive = true, User = hector! },
+                    new UserGroup { IsActive = true, User = liv! },
+                    new UserGroup { IsActive = true, User = otep! },
+                    new UserGroup { IsActive = true, User = ozzy! },
+                    new UserGroup { IsActive = true, User = selena! },
+            ],
+            };
+            _context.Add(selenaGroup);
+
+            await _context.SaveChangesAsync();
+        }
+    }
+
+    private async Task CheckPredictionsAsync()
+    {
+        if (!_context.Predictions.Any())
+        {
+            var random = new Random();
+            var predictions = new List<Prediction>();
+            var groups = await _context.Groups
+                .Include(x => x.Tournament)
+                .ThenInclude(x => x.Matches)
+                .Include(x => x.Members)
+                .ToListAsync();
+            foreach (var group in groups)
+            {
+                foreach (var match in group.Tournament.Matches!)
+                {
+                    foreach (var member in group.Members!)
+                    {
+                        predictions.Add(new Prediction
+                        {
+                            GoalsLocal = random.Next(4),
+                            GoalsVisitor = random.Next(4),
+                            Group = group,
+                            Match = match,
+                            Tournament = group.Tournament,
+                            User = member.User,
+                        });
+                    }
+                }
+            }
+            _context.AddRange(predictions);
+            await _context.SaveChangesAsync();
+        }
     }
 
     private async Task CheckTournamentsAsync()
